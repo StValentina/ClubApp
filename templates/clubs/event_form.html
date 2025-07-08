@@ -1,0 +1,12 @@
+{% extends 'clubs/base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h2>Добави събитие към клуб {{ club.name }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-primary" type="submit">Създай събитие</button>
+  </form>
+{% endblock %}

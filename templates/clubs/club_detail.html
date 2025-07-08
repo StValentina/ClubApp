@@ -1,0 +1,71 @@
+{% extends 'clubs/base.html' %}
+
+{% block content %}
+    <h2>{{ club.name }}</h2>
+    <p><strong>Описание:</strong> {{ club.description }}</p>
+    <p><strong>Категория:</strong> {{ club.category }}</p>
+{#    <p><strong>Създаден от:</strong> {{ club.creator.username }}</p>#}
+    <p><strong>Създаден от:</strong> <a href="{% url 'user-profile' club.creator.pk %}">{{ club.creator.username }}</a></p>
+
+    <a class="btn btn-secondary" href="{% url 'club-list' %}">← Назад към всички клубове</a>
+    <hr>
+
+    {% if user == club.creator %}
+        <a class="btn btn-warning" href="{% url 'club-edit' club.pk %}">Редактирай клуба</a>
+        <a class="btn btn-danger" href="{% url 'club-delete' club.pk %}">Изтрий клуба</a>
+    {% endif %}
+
+    <hr>
+    <h4>Събития</h4>
+
+    {% if club.events.all %}
+        <ul class="list-group">
+            {% for event in club.events.all %}
+                <li class="list-group-item">
+                    <strong>{{ event.title }}</strong> – {{ event.date }}<br>
+                    <small>Място: {{ event.location }}</small>
+                </li>
+                {% if user == event.creator %}
+                    <a href="{% url 'event-update' event.pk %}" class="btn btn-sm btn-warning">Редакция</a>
+                    <a href="{% url 'event-delete' event.pk %}" class="btn btn-sm btn-danger">Изтриване</a>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Няма добавени събития за този клуб.</p>
+    {% endif %}
+
+    <hr>
+    {% if user.is_authenticated %}
+        <a class="btn btn-success my-2" href="{% url 'event-create' club.pk %}">Добави събитие</a>
+    {% endif %}
+
+    <hr>
+    <h4>Публикации</h4>
+
+    {% if club.posts.all %}
+        <ul class="list-group">
+            {% for post in club.posts.all %}
+                <li class="list-group-item">
+                    <strong>{{ post.title }}</strong> – {{ post.author.username }}<br>
+                    <small>{{ post.created_on|date:"d.m.Y" }}</small><br>
+                    {{ post.content|truncatewords:25 }}
+                    <br>
+                    {% if user == post.author %}
+                        <a href="{% url 'post-update' post.pk %}" class="btn btn-sm btn-warning">Редакция</a>
+                        <a href="{% url 'post-delete' post.pk %}" class="btn btn-sm btn-danger">Изтриване</a>
+                    {% endif %}
+                    <a href="{% url 'post-detail' post.pk %}" class="btn btn-sm btn-info">Прочети повече</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Няма публикации за този клуб.</p>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <a class="btn btn-success my-2" href="{% url 'post-create' club.pk %}">Добави публикация</a>
+    {% endif %}
+
+
+
+{% endblock %}

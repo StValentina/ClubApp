@@ -1,0 +1,10 @@
+{% extends 'clubs/base.html' %}
+
+{% block content %}
+  <h1>Добре дошъл в Онлайн клуб по интереси!</h1>
+  {% if user.is_authenticated %}
+    <p>Здравей, {{ user.username }}!</p>
+  {% else %}
+    <p>Гост сте. <a href="{% url 'login' %}">Вход</a> или <a href="{% url 'register' %}">Регистрация</a></p>
+  {% endif %}
+{% endblock %}
