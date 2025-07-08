@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, DeleteView, DetailView
 
-from clubs.forms import CommentForm
+from posts.forms import CommentForm
 from posts.models import Post, Comment
 
 

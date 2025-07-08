@@ -13,6 +13,9 @@ from posts.models import Post
 
 
 # Create your views here.
+def home(request):
+    return render(request, 'clubs/home.html')
+
 class ClubListView(ListView):
     model = Club
     template_name = 'clubs/club_list.html'

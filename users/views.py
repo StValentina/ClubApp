@@ -10,8 +10,6 @@ from users.forms import RegisterForm
 
 
 # Create your views here.
-def home(request):
-    return render(request, 'clubs/home.html')
 
 def register(request):
     if request.method == 'POST':
