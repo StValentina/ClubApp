@@ -1,0 +1,26 @@
+# Django
+*.sqlite3
+*.pyc
+__pycache__/
+db.sqlite3
+
+# Virtual env
+venv/
+.env
+*.env
+
+# Static/media files
+/staticfiles/
+/media/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Migrations (по избор)
+**/migrations/*.py
+!**/migrations/__init__.py
