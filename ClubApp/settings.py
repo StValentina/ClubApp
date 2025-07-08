@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     'clubs',
-     'crispy_forms',
-     'crispy_bootstrap5',
+    'users',
+    'clubs',
+    'events',
+    'posts',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -90,7 +93,7 @@ WSGI_APPLICATION = 'ClubApp.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "club_db",
+        "NAME": "clubs_db",
         "USER": "postgres",
         "PASSWORD": "admin",
         "HOST": "127.0.0.1",
