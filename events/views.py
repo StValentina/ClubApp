@@ -1,16 +1,17 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, UpdateView
+from django.views.generic import CreateView, DeleteView, UpdateView, DetailView
 
 from clubs.models import Club
+from events.forms import EventBaseForm
 from events.models import Event
 
 
 # Create your views here.
 class EventCreateView(LoginRequiredMixin, CreateView):
     model = Event
-    fields = ['title', 'date', 'location']
+    form_class = EventBaseForm
     template_name = 'events/event_form.html'
 
     def get_context_data(self, **kwargs):
@@ -27,14 +28,14 @@ class EventCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse_lazy('club-detail', kwargs={'pk': self.kwargs['club_id']})
 
-class EventDetailView(DeleteView):
+class EventDetailView(DetailView):
     model = Event
     template_name = 'events/event_detail.html'
     context_object_name = 'event'
 
 class EventUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Event
-    fields = ['title', 'date', 'location']
+    form_class = EventBaseForm
     template_name = 'events/event_form.html'
 
     def get_success_url(self):

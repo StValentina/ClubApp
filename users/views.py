@@ -29,7 +29,7 @@ def register(request):
         'form': form
     }
 
-    return render(request, 'clubs/../templates/common/register.html', context)
+    return render(request, 'common/register.html', context)
 
 def custom_logout_view(request):
     logout(request)

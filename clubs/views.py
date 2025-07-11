@@ -8,6 +8,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.db.models import Q
 
+from clubs.forms import ClubBaseForm
 from clubs.models import Club
 from events.models import Event
 from posts.models import Post
@@ -55,7 +56,7 @@ class ClubDetailView(DetailView):
 
 class ClubCreateView(LoginRequiredMixin, CreateView):
     model = Club
-    fields = ['name', 'description', 'image_url', 'category']
+    form_class = ClubBaseForm
     template_name = 'clubs/club_form.html'
     success_url = reverse_lazy('club-list')
 
@@ -65,7 +66,7 @@ class ClubCreateView(LoginRequiredMixin, CreateView):
 
 class ClubUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Club
-    fields = ['name', 'description', 'category']
+    form_class = ClubBaseForm
     template_name = 'clubs/club_form.html'
     success_url = reverse_lazy('club-list')
 

@@ -11,7 +11,7 @@ from posts.models import Post, Comment
 # Create your views here.
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content']
+    form_class = CommentForm
     template_name = 'posts/post_form.html'
 
     def form_valid(self, form):
@@ -31,7 +31,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content']
+    form_class = CommentForm
     template_name = 'posts/post_form.html'
 
     def get_success_url(self):
