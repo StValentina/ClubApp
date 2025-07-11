@@ -12,6 +12,11 @@ class Club(models.Model):
 
     description = models.TextField()
 
+    image_url = models.URLField(
+        null=True,
+        blank=True,
+    )
+
     category = models.CharField(
         max_length=100,
         choices=CategoryChoices.choices,
