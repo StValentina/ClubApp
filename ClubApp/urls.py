@@ -24,7 +24,7 @@ from users.views import custom_logout_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('login/', auth_views.LoginView.as_view(template_name='clubs/login.html'), name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name='common/login.html'), name='login'),
     path('logout/', custom_logout_view, name='logout'),
     path('clubs/', include('clubs.urls')),
     path('users/', include('users.urls')),

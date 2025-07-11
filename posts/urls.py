@@ -1,7 +1,6 @@
 from django.urls import path
 
-from clubs.views import PostCreateView
-from posts.views import PostUpdateView, PostDeleteView, PostDetailView, CommentDeleteView
+from posts.views import PostUpdateView, PostDeleteView, PostDetailView, CommentDeleteView, PostCreateView
 
 urlpatterns = [
     path('<int:pk>/', PostDetailView.as_view(), name='post-detail'),

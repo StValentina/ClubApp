@@ -11,7 +11,7 @@ from events.models import Event
 class EventCreateView(LoginRequiredMixin, CreateView):
     model = Event
     fields = ['title', 'date', 'location']
-    template_name = 'clubs/event_form.html'
+    template_name = 'events/event_form.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -29,13 +29,13 @@ class EventCreateView(LoginRequiredMixin, CreateView):
 
 class EventDetailView(DeleteView):
     model = Event
-    template_name = 'clubs/event_detail.html'
+    template_name = 'events/event_detail.html'
     context_object_name = 'event'
 
 class EventUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Event
     fields = ['title', 'date', 'location']
-    template_name = 'clubs/event_form.html'
+    template_name = 'events/event_form.html'
 
     def get_success_url(self):
         return reverse_lazy('club-detail', kwargs={'pk': self.object.club.pk})
@@ -45,7 +45,7 @@ class EventUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class EventDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Event
-    template_name = 'clubs/event_confirm_delete.html'
+    template_name = 'events/event_confirm_delete.html'
 
     def get_success_url(self):
         return reverse_lazy('club-detail', kwargs={'pk': self.object.club.pk})

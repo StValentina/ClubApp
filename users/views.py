@@ -29,14 +29,14 @@ def register(request):
         'form': form
     }
 
-    return render(request, 'clubs/register.html', context)
+    return render(request, 'clubs/../templates/common/register.html', context)
 
 def custom_logout_view(request):
     logout(request)
     return redirect('home')
 
 class ProfileView(LoginRequiredMixin, TemplateView ):
-    template_name = 'clubs/profile.html'
+    template_name = 'user/profile.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -51,7 +51,7 @@ class ProfileView(LoginRequiredMixin, TemplateView ):
 # за профили, които се разглеждат от други или място с линкове към тях. и шаблона.
 class PublicProfileView(DetailView):
     model = User
-    template_name = 'clubs/public_profile.html'
+    template_name = 'user/public_profile.html'
     context_object_name = 'user_obj'
 
     def get_context_data(self, **kwargs):

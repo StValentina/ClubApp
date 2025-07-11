@@ -10,7 +10,9 @@ class Club(models.Model):
         max_length=100,
     )
 
-    description = models.TextField()
+    description = models.TextField(
+        max_length=300,
+    )
 
     image_url = models.URLField(
         null=True,
