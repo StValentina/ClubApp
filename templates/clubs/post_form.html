@@ -3,11 +3,14 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <h2>Нова публикация за клуб: {{ club.name }}</h2>
-    {{ post.author }} / {{ user }}
-  <form method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-primary">Публикувай</button>
-  </form>
+    <section class="d-flex justify-content-center align-items-center mt-5">
+        <div class="container" style="max-width: 500px;">
+            <form method="post" class="p-4 border rounded bg-white shadow">
+                <h2 class="text-center mb-4">Нова публикация за клуб: <strong> {{ club.name }} </strong></h2>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-primary" type="submit">Публикувай</button>
+            </form>
+        </div>
+    </section>
 {% endblock %}

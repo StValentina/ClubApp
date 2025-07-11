@@ -1,6 +1,7 @@
 {% extends 'clubs/base.html' %}
 
 {% block content %}
+    <div class="container md-4">
   <h2>Профил: {{ user.username }}</h2>
   <p>Имейл: {{ user.email }}</p>
 
@@ -58,4 +59,5 @@
   {% else %}
     <p>Няма коментари.</p>
   {% endif %}
+    </div>
 {% endblock %}

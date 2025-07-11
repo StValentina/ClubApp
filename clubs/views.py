@@ -9,6 +9,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.db.models import Q
 
 from clubs.models import Club
+from events.models import Event
 from posts.models import Post
 
 
@@ -46,9 +47,15 @@ class ClubDetailView(DetailView):
     template_name = 'clubs/club_detail.html'
     context_object_name = 'club'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['events'] = Event.objects.filter(club=self.object)
+        context['posts'] = Post.objects.filter(club=self.object)
+        return context
+
 class ClubCreateView(LoginRequiredMixin, CreateView):
     model = Club
-    fields = ['name', 'description', 'category']
+    fields = ['name', 'description', 'image_url', 'category']
     template_name = 'clubs/club_form.html'
     success_url = reverse_lazy('club-list')
 

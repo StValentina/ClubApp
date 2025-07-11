@@ -1,5 +1,5 @@
 {% extends 'clubs/base.html' %}
-
+{% load static %}
 {% block content %}
     {#    <div class="container mt-4">#}
     {#        <h2 class="text-center mb-4">Всички клубове</h2>#}
@@ -46,41 +46,51 @@
     {#            <p class="text-danger">❗ Няма намерено съдържание, отговарящо на търсенето или филтъра.</p>#}
     {#        {% endif %}#}
     {#    </div>#}
+    {% if clubs %}
+        <div id="categoryCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
 
-    <div class="carousel slide" data-bs-ride="carousel">
-        {% if clubs %}
             <div class="carousel-inner">
-            {% for club in clubs %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                    <div class="bg-image"
-                         style="background-image: url('{{ category.image.url }}');
-                                 background-size: cover;
-                                 background-position: center;
-                                 height: 80vh;">
-                        <div class="mask d-flex justify-content-center align-items-center"
-                             style="background-color: rgba(0, 0, 0, 0.6); height: 100%;">
-                            <div class="text-white text-center">
-                                <h2>{{ category.name }}</h2>
-                                <p>{{ category.description }}</p>
+                {% for club in clubs %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+
+                        <div class="bg-image"
+                             style="background-image: url(
+                                     {% if club.image_url %}
+                                         {{ club.image_url }}
+                                     {% else %}
+                                         {% static 'images/istockphoto-1345542613-612x612.jpg' %}
+                                     {% endif %}
+                                     );
+                                     background-size: cover;
+                                     background-position: center;
+                                     height: 80vh;">
+                            <div class="mask d-flex justify-content-center align-items-center"
+                                 style="background-color: rgba(0, 0, 0, 0.6); height: 100%;">
+                                <div class="text-white text-center">
+                                    <h2>{{ club.name }}</h2>
+                                    <p>{{ club.description }}</p>
+                                    <a class="btn btn-outline-light" href="{% url 'club-detail' club.pk %}">Повече информация</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p class="text-danger">❗ Няма намерено съдържание, отговарящо на търсенето или филтъра.</p>
-        {% endif %}
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Предишен</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#categoryCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Следващ</span>
+            </button>
         </div>
+    {% else %}
+        <div class="container mt-4">
+            <p class="text-danger">❗ Няма намерено съдържание, отговарящо на търсенето или филтъра.</p>
+        </div>
+    {% endif %}
 
-        <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Предишен</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#categoryCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Следващ</span>
-        </button>
-    </div>
 
 
 

@@ -1,12 +1,14 @@
 {% extends 'clubs/base.html' %}
 
 {% block content %}
-  <h2>Изтриване на събитие</h2>
-  <p>Наистина ли искаш да изтриеш събитието <strong>{{ event.title }}</strong>?</p>
+    <div class="container md-4">
+        <h2>Изтриване на събитие</h2>
+        <p>Наистина ли искаш да изтриеш събитието <strong>{{ event.title }}</strong>?</p>
 
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Изтрий</button>
-    <a href="{% url 'club-detail' event.club.pk %}" class="btn btn-secondary">Отказ</a>
-  </form>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Изтрий</button>
+            <a href="{% url 'club-detail' event.club.pk %}" class="btn btn-secondary">Отказ</a>
+        </form>
+    </div>
 {% endblock %}
