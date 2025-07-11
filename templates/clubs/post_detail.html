@@ -3,38 +3,40 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <h2>{{ post.title }}</h2>
-  <p><strong>Автор:</strong> {{ post.author }}</p>
-  <p><em>{{ post.created_on|date:"d.m.Y" }}</em></p>
-  <p>{{ post.content }}</p>
+    <div class="content-section">
+        <h2>{{ post.title }}</h2>
+        <p><strong>Автор:</strong> {{ post.author }}</p>
+        <p><em>{{ post.created_on|date:"d.m.Y" }}</em></p>
+        <p>{{ post.content }}</p>
 
-  <hr>
-  <h4>Коментари</h4>
-  {% if comments %}
-    <ul class="list-group">
-      {% for comment in comments %}
-        <li class="list-group-item">
-          <strong>{{ comment.author }}</strong> – {{ comment.created_on|date:"d.m.Y" }}<br>
-          {{ comment.text }}
-        </li>
-          {% if user == comment.author or user.is_superuser %}
-              <a href="{% url 'comment-delete' comment.pk %}" class="btn btn-sm btn-danger">Изтрий</a>
-          {% endif %}
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>Все още няма коментари.</p>
-  {% endif %}
+        <hr>
+        <h4>Коментари</h4>
+        {% if comments %}
+            <ul class="list-group">
+                {% for comment in comments %}
+                    <li class="list-group-item">
+                        <strong>{{ comment.author }}</strong> – {{ comment.created_on|date:"d.m.Y" }}<br>
+                        {{ comment.text }}
+                    </li>
+                    {% if user == comment.author or user.is_superuser %}
+                        <a href="{% url 'comment-delete' comment.pk %}" class="btn btn-sm btn-danger">Изтрий</a>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Все още няма коментари.</p>
+        {% endif %}
 
-  <hr>
-  {% if user.is_authenticated %}
-    <h5>Добави коментар</h5>
-    <form method="post">
-      {% csrf_token %}
-      {{ form|crispy }}
-      <button class="btn btn-primary" type="submit">Коментирай</button>
-    </form>
-  {% else %}
-    <p><a href="{% url 'login' %}">Влез</a>, за да добавиш коментар.</p>
-  {% endif %}
+        <hr>
+        {% if user.is_authenticated %}
+            <h5>Добави коментар</h5>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-primary" type="submit">Коментирай</button>
+            </form>
+        {% else %}
+            <p><a href="{% url 'login' %}">Влез</a>, за да добавиш коментар.</p>
+        {% endif %}
+    </div>
 {% endblock %}

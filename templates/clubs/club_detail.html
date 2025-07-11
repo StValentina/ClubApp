@@ -7,14 +7,16 @@
 
             <!-- Събития (лява колона) -->
             <div class="col-md-3 mb-4">
-                <div class="card h-100 d-flex flex-column shadow">
-                    <div class="card-body flex-grow-1">
+                <div class="card h-100 d-flex flex-column shadow" style="max-height: 700px;">
+                    <div class="card-body flex-grow-1 overflow-auto">
                         <h4 class="card-title">Events</h4>
                         {% if events %}
                             {% for event in events %}
                                 <div class="mb-2">
-                                    <strong>{{ event.title }}</strong><br>
-                                    <small>{{ event.date }}</small>
+                                    <strong><a
+                                            href="{% url 'event-detail' event.pk %}">{{ event.title }}</a></strong><br>
+                                    When: <small>{{ event.date }}</small><br>
+                                    Where: <small>{{ event.location }}</small>
                                 </div>
                             {% endfor %}
                         {% else %}
@@ -29,19 +31,23 @@
 
             <!-- Описание на клуба (централна колона) -->
             <div class="col-md-6 mb-4">
-                <div class="card h-100 d-flex flex-column shadow">
+                <div class="card h-100 d-flex flex-column shadow" style="max-height: 700px;">
                     {% if club.image_url %}
                         <img src="{{ club.image_url }}" class="card-img-top" alt="{{ club.name }}"
                              style="height: 200px; object-fit: cover;">
                     {% else %}
-                        <img src="{% static 'images/istockphoto-1345542613-612x612.jpg' %}" class="card-img-top" alt="{{ club.name }}"
+                        <img src="{% static 'images/istockphoto-1345542613-612x612.jpg' %}" class="card-img-top"
+                             alt="{{ club.name }}"
                              style="height: 200px; object-fit: cover;">
                     {% endif %}
                     <div class="card-body flex-grow-1">
                         <h3 class="card-title">{{ club.name }}</h3>
-                        <p class="card-text"><strong>Description:</strong> {{ club.description }}</p>
+                        <div class="mb-3" style="max-height: 220px; overflow-y: auto;">
+                            <p><strong>Description:</strong> {{ club.description }}</p>
+                        </div>
                         <p class="card-text"><strong>Category:</strong> {{ club.category }}</p>
-                        <p class="card-text"><strong>Created by:</strong> <a href="#">{{ club.creator }}</a></p>
+                        <p class="card-text"><strong>Created by:</strong> <a
+                                href="{% url 'user-profile' user.pk %}">{{ club.creator }}</a></p>
                     </div>
                     <div class="card-footer bg-transparent border-0">
                         <a href="{% url 'club-list' %}" class="btn btn-secondary w-100 mb-2">← Back to all clubs</a>
@@ -57,14 +63,14 @@
 
             <!-- Публикации (дясна колона) -->
             <div class="col-md-3 mb-4">
-                <div class="card h-100 d-flex flex-column shadow">
-                    <div class="card-body flex-grow-1">
+                <div class="card h-100 d-flex flex-column shadow" style="max-height: 700px;">
+                    <div class="card-body flex-grow-1 overflow-auto">
                         <h4 class="card-title">Posts</h4>
                         {% if posts %}
                             {% for post in posts %}
                                 <div class="mb-2">
-                                    <strong>{{ post.title }}</strong><br>
-                                    <small>{{ post.created_at }}</small>
+                                    <strong><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></strong><br>
+                                    <small>{{ post.content|truncatewords:6 }}</small>
                                 </div>
                             {% endfor %}
                         {% else %}

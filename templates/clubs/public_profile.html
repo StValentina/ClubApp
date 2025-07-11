@@ -1,53 +1,55 @@
 {% extends 'clubs/base.html' %}
 
 {% block content %}
-  <h2>Профил: {{ user_obj.username }}</h2>
-  <p>Имейл: {{ user_obj.email }}</p>
+    <div class="container">
+        <h2>Профил: {{ user_obj.username }}</h2>
+        <p>Имейл: {{ user_obj.email }}</p>
 
-  <hr>
-  <h4>Създадени клубове</h4>
-  <ul>
-    {% for club in clubs %}
-      <li><a href="{% url 'club-detail' club.pk %}">{{ club.name }}</a></li>
-    {% empty %}
-      <li>Няма създадени клубове.</li>
-    {% endfor %}
-  </ul>
+        <hr>
+        <h4>Създадени клубове</h4>
+        <ul>
+            {% for club in clubs %}
+                <li><a href="{% url 'club-detail' club.pk %}">{{ club.name }}</a></li>
+            {% empty %}
+                <li>Няма създадени клубове.</li>
+            {% endfor %}
+        </ul>
 
-  <hr>
-  <h4>Събития</h4>
-  <ul>
-    {% for event in events %}
-      <li>
-        <a href="{% url 'event-detail' event.pk %}">{{ event.title }}</a>
-        ({{ event.date }}) от клуб
-        <a href="{% url 'club-detail' event.club.pk %}">{{ event.club.name }}</a>
-      </li>
-    {% empty %}
-      <li>Няма събития.</li>
-    {% endfor %}
-  </ul>
+        <hr>
+        <h4>Събития</h4>
+        <ul>
+            {% for event in events %}
+                <li>
+                    <a href="{% url 'event-detail' event.pk %}">{{ event.title }}</a>
+                    ({{ event.date }}) от клуб
+                    <a href="{% url 'club-detail' event.club.pk %}">{{ event.club.name }}</a>
+                </li>
+            {% empty %}
+                <li>Няма събития.</li>
+            {% endfor %}
+        </ul>
 
-  <hr>
-  <h4>Публикации</h4>
-  <ul>
-    {% for post in posts %}
-      <li><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></li>
-    {% empty %}
-      <li>Няма публикации.</li>
-    {% endfor %}
-  </ul>
+        <hr>
+        <h4>Публикации</h4>
+        <ul>
+            {% for post in posts %}
+                <li><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></li>
+            {% empty %}
+                <li>Няма публикации.</li>
+            {% endfor %}
+        </ul>
 
-  <hr>
-  <h4>Коментари</h4>
-  <ul>
-    {% for comment in comments %}
-      <li>
-        {{ comment.text|truncatewords:10 }} ({{ comment.created_on|date:"d.m.Y" }})<br>
-        към <a href="{% url 'post-detail' comment.post.pk %}">{{ comment.post.title }}</a>
-      </li>
-    {% empty %}
-      <li>Няма коментари.</li>
-    {% endfor %}
-  </ul>
+        <hr>
+        <h4>Коментари</h4>
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    {{ comment.text|truncatewords:10 }} ({{ comment.created_on|date:"d.m.Y" }})<br>
+                    към <a href="{% url 'post-detail' comment.post.pk %}">{{ comment.post.title }}</a>
+                </li>
+            {% empty %}
+                <li>Няма коментари.</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

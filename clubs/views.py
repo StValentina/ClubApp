@@ -49,7 +49,7 @@ class ClubDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['events'] = Event.objects.filter(club=self.object)
+        context['events'] = Event.objects.filter(club=self.object).order_by('-date')
         context['posts'] = Post.objects.filter(club=self.object)
         return context
 
