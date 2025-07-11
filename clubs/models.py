@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from clubs.choices import CategoryChoices
+
+
 # Create your models here.
 class Club(models.Model):
     name = models.CharField(
@@ -11,6 +14,8 @@ class Club(models.Model):
 
     category = models.CharField(
         max_length=100,
+        choices=CategoryChoices.choices,
+        default=CategoryChoices.CHESS
     )
 
     creator = models.ForeignKey(

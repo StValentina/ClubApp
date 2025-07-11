@@ -1,10 +1,30 @@
 {% extends 'clubs/base.html' %}
-
+{% load static %}
 {% block content %}
-  <h1>Добре дошъл в Онлайн клуб по интереси!</h1>
-  {% if user.is_authenticated %}
-    <p>Здравей, {{ user.username }}!</p>
-  {% else %}
-    <p>Гост сте. <a href="{% url 'login' %}">Вход</a> или <a href="{% url 'register' %}">Регистрация</a></p>
-  {% endif %}
+    <!-- Background image -->
+    <div class="bg-image text-center text-white d-flex justify-content-center align-items-center"
+         style="background-image: url('{% static 'images/istockphoto-2212325796-1024x1024.jpg' %}');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;"
+    >
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+            <div class="bg-dark bg-opacity-75 p-5 rounded">
+                <div class="text-white">
+                    <h1 class="mb-3">Добре дошъл в Онлайн клуб по интереси!</h1>
+                    {% if user.is_authenticated %}
+                        <h3 class="mb-4">Здравей, {{ user.username }}!</h3>
+                    {% else %}
+                        <a data-mdb-ripple-init
+                           class="btn btn-outline-light btn-lg m-2"
+                           href="{% url 'login' %}"
+                           role="button"
+                           rel="nofollow"
+                           target="_blank">Вход</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Background image -->
 {% endblock %}
