@@ -22,6 +22,11 @@ class Event(models.Model):
         max_length=255,
     )
 
+    description = models.TextField(
+        max_length=500,
+        default="",
+    )
+
     creator = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

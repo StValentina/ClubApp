@@ -1,14 +1,16 @@
 {% extends 'common/base.html' %}
 
 {% block content %}
-    <div class="container">
-        <h2>Потвърждение за изтриване</h2>
-        <p>Наистина ли искате да изтриете клуба <strong>{{ club.name }}</strong>?</p>
 
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Изтрий</button>
-            <a href="{% url 'club-detail' club.pk %}" class="btn btn-secondary">Отказ</a>
-        </form>
-    </div>
+        <div class="container" style="max-width: 500px; margin-left: auto;">
+            <h2>Потвърждение за изтриване</h2>
+            <p>Наистина ли искате да изтриете клуба <strong>{{ club.name }}</strong>?</p>
+
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Изтрий</button>
+                <a href="{% url 'club-detail' club.pk %}" class="btn btn-secondary">Отказ</a>
+            </form>
+        </div>
+
 {% endblock %}

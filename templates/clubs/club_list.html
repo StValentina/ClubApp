@@ -1,51 +1,7 @@
 {% extends 'common/base.html' %}
 {% load static %}
 {% block content %}
-    {#    <div class="container mt-4">#}
-    {#        <h2 class="text-center mb-4">Всички клубове</h2>#}
-    {##}
-    {#        <!-- Форма за търсене -->#}
-    {#        <form method="get" class="row g-2 mb-4">#}
-    {#            <div class="col-md-4 text-center">#}
-    {#                <input type="text" name="q" class="form-control" placeholder="Търси..." value="{{ q }}">#}
-    {#            </div>#}
-    {#      <div class="col-md-3">#}
-    {#          <select name="category" class="form-select">#}
-    {#              <option value="всички">Всички категории</option>#}
-    {#              {% for cat in categories %}#}
-    {#                  <option value="{{ cat }}" {% if category == cat %}selected{% endif %}>{{ cat }}</option>#}
-    {#              {% endfor %}#}
-    {#          </select>#}
-    {#      </div>#}
-    {#            <div class="col-md-2">#}
-    {#                <button type="submit" class="btn btn-primary w-100">Филтрирай</button>#}
-    {#            </div>#}
-    {#            <div class="col-md-2">#}
-    {#                <a href="{% url 'club-list' %}" class="btn btn-secondary w-100">Изчисти</a>#}
-    {#            </div>#}
-    {#        </form>#}
-    {##}
-    {#        <!-- Резултати -->#}
-    {#        {% if clubs %}#}
-    {#            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">#}
-    {#                {% for club in clubs %}#}
-    {#                    <div class="col">#}
-    {#                        <div class="card h-100">#}
-    {#                            <div class="card-body">#}
-    {#                                <h5 class="card-title">{{ club.name }}</h5>#}
-    {#                                <p class="card-text">{{ club.description|truncatechars:100 }}</p>#}
-    {#                                <p><strong>Категория:</strong> {{ club.category }}</p>#}
-    {#                                <p><strong>Създаден от:</strong> {{ club.creator.username }}</p>#}
-    {#                                <a href="{% url 'club-detail' club.pk %}">Повече информация</a>#}
-    {#                            </div>#}
-    {#                        </div>#}
-    {#                    </div>#}
-    {#                {% endfor %}#}
-    {#            </div>#}
-    {#        {% else %}#}
-    {#            <p class="text-danger">❗ Няма намерено съдържание, отговарящо на търсенето или филтъра.</p>#}
-    {#        {% endif %}#}
-    {#    </div>#}
+
     {% if clubs %}
         <div id="categoryCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
 
@@ -91,7 +47,50 @@
         </div>
     {% endif %}
 
-
-
-
 {% endblock %}
+
+{#    <div class="container mt-4">#}
+    {#        <h2 class="text-center mb-4">Всички клубове</h2>#}
+    {##}
+    {#        <!-- Форма за търсене -->#}
+    {#        <form method="get" class="row g-2 mb-4">#}
+    {#            <div class="col-md-4 text-center">#}
+    {#                <input type="text" name="q" class="form-control" placeholder="Търси..." value="{{ q }}">#}
+    {#            </div>#}
+    {#      <div class="col-md-3">#}
+    {#          <select name="category" class="form-select">#}
+    {#              <option value="всички">Всички категории</option>#}
+    {#              {% for cat in categories %}#}
+    {#                  <option value="{{ cat }}" {% if category == cat %}selected{% endif %}>{{ cat }}</option>#}
+    {#              {% endfor %}#}
+    {#          </select>#}
+    {#      </div>#}
+    {#            <div class="col-md-2">#}
+    {#                <button type="submit" class="btn btn-primary w-100">Филтрирай</button>#}
+    {#            </div>#}
+    {#            <div class="col-md-2">#}
+    {#                <a href="{% url 'club-list' %}" class="btn btn-secondary w-100">Изчисти</a>#}
+    {#            </div>#}
+    {#        </form>#}
+    {##}
+    {#        <!-- Резултати -->#}
+    {#        {% if clubs %}#}
+    {#            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">#}
+    {#                {% for club in clubs %}#}
+    {#                    <div class="col">#}
+    {#                        <div class="card h-100">#}
+    {#                            <div class="card-body">#}
+    {#                                <h5 class="card-title">{{ club.name }}</h5>#}
+    {#                                <p class="card-text">{{ club.description|truncatechars:100 }}</p>#}
+    {#                                <p><strong>Категория:</strong> {{ club.category }}</p>#}
+    {#                                <p><strong>Създаден от:</strong> {{ club.creator.username }}</p>#}
+    {#                                <a href="{% url 'club-detail' club.pk %}">Повече информация</a>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                {% endfor %}#}
+    {#            </div>#}
+    {#        {% else %}#}
+    {#            <p class="text-danger">❗ Няма намерено съдържание, отговарящо на търсенето или филтъра.</p>#}
+    {#        {% endif %}#}
+    {#    </div>#}

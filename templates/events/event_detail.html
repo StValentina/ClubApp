@@ -1,13 +1,15 @@
 {% extends 'common/base.html' %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" style="max-width: 500px; margin-left: auto;">
         <h2>{{ event.title }}</h2>
         <p><strong>Дата:</strong> {{ event.date }}</p>
         <p><strong>Място:</strong> {{ event.location }}</p>
-        <p><strong>Клуб:</strong> <a href="{% url 'club-detail' event.club.pk %}">{{ event.club.name }}</a></p>
+        <p><strong>Описание:</strong> {{ event.description }}</p>
         <p><strong>Създадено от:</strong> {{ event.creator.username }}</p>
 
         <a href="{% url 'club-detail' event.club.pk %}" class="btn btn-secondary">← Назад към клуба</a>
+        <a href="{% url 'event-update' event.pk %}" class="btn btn-warning">Редактирай</a>
+        <a href="{% url 'event-delete' event.club.pk %}" class="btn btn-danger">Изтрий</a>
     </div>
 {% endblock %}
